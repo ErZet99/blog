@@ -1,5 +1,7 @@
 package com.ErZet.blog.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,10 +15,14 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class UpdateBlogRequest {
-    @Id
+    @NotBlank(message = "BlogId is required.")
     private ObjectId blogId;
+    @NotBlank(message = "Title is required.")
     private String title;
+    @NotBlank(message = "Description is required.")
     private String description;
+    @NotNull(message = "Publish is required.")
     private Boolean publish;
+    @NotBlank(message = "UserId is required.")
     private ObjectId userId;
 }

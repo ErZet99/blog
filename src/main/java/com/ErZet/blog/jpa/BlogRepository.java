@@ -12,5 +12,5 @@ import java.util.List;
 public interface BlogRepository extends MongoRepository<Blog, String> {
     Blog deleteByBlogId(String blogId);
     List<Blog> findByUserId(String blogId, Pageable pageable);
-    Blog findByBlogId(String blogId, Pageable pageable);
+    Blog findByBlogId(String blogId);
 }

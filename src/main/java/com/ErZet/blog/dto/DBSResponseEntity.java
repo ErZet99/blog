@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class DBSResponseEntity<T> {
-    T date;
+    T data;
     private String message;
 }

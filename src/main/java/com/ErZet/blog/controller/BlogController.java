@@ -1,5 +1,6 @@
 package com.ErZet.blog.controller;
 
+import com.ErZet.blog.dto.CommonPaginationRequest;
 import com.ErZet.blog.dto.CreateBlogRequest;
 import com.ErZet.blog.dto.DBSResponseEntity;
 import com.ErZet.blog.dto.UpdateBlogRequest;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Validated
@@ -65,6 +68,26 @@ public class BlogController {
         }
     }
 
+    @GetMapping("v1/blogs")
+    public ResponseEntity<DBSResponseEntity> getBlogsCall(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                          @RequestParam(defaultValue = "10") Integer pageSize,
+                                                          @RequestParam(defaultValue = "id") String sortBy,
+                                                          @RequestParam(defaultValue = "1") String userId) {
+        DBSResponseEntity dbsResponseEntity = new DBSResponseEntity();
+        CommonPaginationRequest commonPaginationRequest = new CommonPaginationRequest();
+        commonPaginationRequest.setPegeNo(pageNo);
+        commonPaginationRequest.setPageSize(pageSize);
+        commonPaginationRequest.setValue(userId);
+        commonPaginationRequest.setSortBy(sortBy);
+        try {
+            List<Blog> blogs = blogService.getBlogs(commonPaginationRequest);
+            dbsResponseEntity.setData(blogs);
+            return ResponseEntity.ok(dbsResponseEntity);
+        }catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     public ResponseEntity<DBSResponseEntity> deleteBlogCall(@PathVariable String blogId) {
         DBSResponseEntity dbsResponseEntity = new DBSResponseEntity();
 
@@ -76,4 +99,6 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
 }

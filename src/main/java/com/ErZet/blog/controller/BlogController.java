@@ -55,7 +55,7 @@ public class BlogController {
         }
     }
 
-    @GetMapping("v1/blogs/{blogId")
+    @GetMapping("v1/blogs/{blogId}")
     public ResponseEntity<DBSResponseEntity> getBlogCall(@PathVariable String blogId) {
         DBSResponseEntity dbsResponseEntity = new DBSResponseEntity();
 

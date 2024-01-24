@@ -16,8 +16,8 @@ public class CommentResponse {
     @Id
     private String commentId;
     private String title;
-    private ObjectId userId;
-    private ObjectId blogId;
+    private String userId;
+    private String blogId;
     private LocalDateTime createdAt;
     public LocalDateTime updatedAd;
 }

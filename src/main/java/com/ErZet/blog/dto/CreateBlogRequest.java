@@ -16,5 +16,5 @@ public class CreateBlogRequest {
     private String title;
     private String description;
     private Boolean publish;
-    private ObjectId userId;
+    private String userId;
 }

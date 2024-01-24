@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UpdateBlogRequest {
     @NotBlank(message = "BlogId is required.")
-    private ObjectId blogId;
+    private String blogId;
     @NotBlank(message = "Title is required.")
     private String title;
     @NotBlank(message = "Description is required.")
@@ -24,5 +24,5 @@ public class UpdateBlogRequest {
     @NotNull(message = "Publish is required.")
     private Boolean publish;
     @NotBlank(message = "UserId is required.")
-    private ObjectId userId;
+    private String userId;
 }

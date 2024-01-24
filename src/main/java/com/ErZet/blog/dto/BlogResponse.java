@@ -13,12 +13,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class BlogResponse {
-    @Id
-    private ObjectId blogId;
+    private String blogId;
     private String title;
     private String description;
     private Boolean publish;
-    private ObjectId userId;
+    private String userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

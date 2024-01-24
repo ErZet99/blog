@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @Document
 public class Blog {
     @Id
-    private ObjectId blogId;
+    private String blogId;
     private String title;
     private String description;
     private Boolean publish;
-    private ObjectId userId;
+    private String userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

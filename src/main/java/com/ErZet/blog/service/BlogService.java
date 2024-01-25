@@ -5,6 +5,7 @@ import com.ErZet.blog.dto.CreateBlogRequest;
 import com.ErZet.blog.dto.UpdateBlogRequest;
 import com.ErZet.blog.jpa.BlogRepository;
 import com.ErZet.blog.model.Blog;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +31,7 @@ public class BlogService {
 
     public Blog updateBlog(UpdateBlogRequest updatedBlogRequest) throws Exception{
         Blog blog = blogRepository.findByBlogId(updatedBlogRequest.getBlogId());
+        if(ObjectUtils.isEmpty(blog)) return null;      // handling if blog is not found
         BeanUtils.copyProperties(updatedBlogRequest, blog);
         blog.setUpdatedAt(LocalDateTime.now());
         return blogRepository.save(blog);

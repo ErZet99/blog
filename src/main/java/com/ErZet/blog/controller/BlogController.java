@@ -4,14 +4,14 @@ import com.ErZet.blog.dto.CommonPaginationRequest;
 import com.ErZet.blog.dto.CreateBlogRequest;
 import com.ErZet.blog.dto.DBSResponseEntity;
 import com.ErZet.blog.dto.UpdateBlogRequest;
+import com.ErZet.blog.exception.RecordNotFoundException;
 import com.ErZet.blog.model.Blog;
 import com.ErZet.blog.service.BlogService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +24,17 @@ public class BlogController {
     private BlogService blogService;
 
     @PutMapping("v1/blogs")
-    public ResponseEntity<DBSResponseEntity> updateBlogCall(@RequestBody UpdateBlogRequest updateBlogRequest) {
+    public ResponseEntity<DBSResponseEntity> updateBlogCall(@Valid @RequestBody UpdateBlogRequest updateBlogRequest) {
         DBSResponseEntity dbsResponseEntity = new DBSResponseEntity();
         try {
             Blog updatedBlog = blogService.updateBlog(updateBlogRequest);
+            if(ObjectUtils.isEmpty(updatedBlog)) throw new RecordNotFoundException("Record not present in databse.");
             dbsResponseEntity.setMessage("Blog updated successfully.");
             dbsResponseEntity.setData(updatedBlog);
             return ResponseEntity.ok(dbsResponseEntity);
-        } catch (Exception exception) {
+        }catch (RecordNotFoundException exception) {
+            throw exception;
+        }catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

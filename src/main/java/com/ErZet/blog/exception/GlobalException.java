@@ -21,12 +21,11 @@ public class GlobalException {
         return new ResponseEntity<>(dbsResponseEntity, HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RecordNotFoundException.class)     // my own exception handler
-    public ResponseEntity<DBSResponseEntity> handlingRecordNotFoundExceptions
+    public ResponseEntity<DBSResponseEntity> handleRecordNotFoundExceptions
             (RecordNotFoundException ex) {
         DBSResponseEntity dbsResponseEntity = new DBSResponseEntity();
-        dbsResponseEntity.setMessage(ex.getMessage());
+        dbsResponseEntity.setMessage(ex.message);
         return new ResponseEntity<>(dbsResponseEntity, HttpStatus.NOT_FOUND);
     }
 }

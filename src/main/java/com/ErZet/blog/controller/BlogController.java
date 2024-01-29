@@ -31,7 +31,7 @@ public class BlogController {
 
         try {
             Blog updatedBlog = blogService.updateBlog(updateBlogRequest);
-            if(ObjectUtils.isEmpty(updatedBlog)) throw new RecordNotFoundException("Record not present in databse.");
+            if(ObjectUtils.isEmpty(updatedBlog)) throw new RecordNotFoundException("Record not present in database.");
             dbsResponseEntity.setMessage("Blog updated successfully.");
             dbsResponseEntity.setData(updatedBlog);
             return ResponseEntity.ok(dbsResponseEntity);

@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)  // if data or messee is null, then not include
 public class DBSResponseEntity<T> {
-    T data;
+    private T data;
     private String message;
 }

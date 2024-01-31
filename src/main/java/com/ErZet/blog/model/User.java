@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +20,10 @@ public class User {
     private String fullName;
     private String userName;
     private String password;
-    private byte role;
+    private List<String> roles;
+    private Integer isSocialRegister;
+    private Integer otp;
+    private Integer isAccountVerify;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

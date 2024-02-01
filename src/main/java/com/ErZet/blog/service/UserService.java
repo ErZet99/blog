@@ -2,6 +2,7 @@ package com.ErZet.blog.service;
 
 import com.ErZet.blog.dto.LoginUserRequest;
 import com.ErZet.blog.dto.RegisterUserRequest;
+import com.ErZet.blog.exception.UserAlreadyRegisterException;
 import com.ErZet.blog.jpa.UserRepository;
 import com.ErZet.blog.model.User;
 import com.ErZet.blog.utils.AppUtils;
